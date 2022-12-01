@@ -2,8 +2,8 @@ import { Box, List, Img, Picture, Title, Time, Hr, Address, Email, Phone } from 
 import WorkTime from "./WorkTime";
 import image from "../../img/defaultLogo.jpg";
 
-const BASE_URL = "https://petly-be.herokuapp.com/friends";
-
+const SERVER_NAME = process.env.REACT_APP_SITE_URL;
+const BASE_URL = `${SERVER_NAME}/friends`;
 const FriendCard = friend => {
   const { title, address, email, phone, workDays, imageUrl, url } = friend.friend;
   const shortName = title.split(" ").slice(0, 3).join(" ");

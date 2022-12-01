@@ -19,6 +19,7 @@ import {
   ImageContainer,
 } from "./UserDataItem.styled";
 import { useForm } from "react-hook-form";
+const BASE_URL = process.env.REACT_APP_SITE_URL;
 
 const UserDataForm = () => {
   const { data: user = [], isLoading } = useGetUserQuery();
@@ -36,13 +37,11 @@ const UserDataForm = () => {
     (() => dispatch(userActions.getUserNotice(result?.notieceId)))();
   });
 
-  const BASE_URL = "https://petly-be.herokuapp.com/";
   const imgUrl = user?.data?.result?.avatar;
   const imgAlt = user?.data?.result?.name;
   const birthday = user.data?.result?.birthday;
   const city = user.data?.result?.city;
-  const emailRegex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   const nameRegex = /[a-zA-Z]+/;
   const cityRegex = /^(\w+(,)\s*)+\w+$/;
   const phoneRegex = /^\+380\d{3}\d{2}\d{2}\d{2}$/;

@@ -6,11 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import devaultIcon from "../../img/default-icon-pets.png";
 import { PetItem, InfoPet, Title, ImgPet, BoxInfo, DeleteBtm, DelIcon } from "./PetsListItem.styled";
 
+const BASE_URL = process.env.REACT_APP_SITE_URL;
+
 const PetsListItem = ({ id, name, birthday, breed, comment, avatar }) => {
   const [deletePet, { isLoading: isDeleting }] = useDeletePetMutation();
 
   isDeleting && toast.success(`😿 ${name} was removed`);
-  const BASE_URL = "https://petly-be.herokuapp.com/";
 
   return (
     <PetItem>

@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { userSlice } from "redux/user";
 import { useState } from "react";
 import { useAddFavoriteNoticeMutation } from "redux/userApi";
+const BASE_URL = process.env.REACT_APP_SITE_URL;
 
 function ModalNotice({ onClose, favorite }) {
   const id = useSelector(({ notice }) => notice.modalViewNotice.id);
@@ -33,7 +34,6 @@ function ModalNotice({ onClose, favorite }) {
     return setFavorited(true);
   };
 
-  const BASE_URL = "https://petly-be.herokuapp.com/";
   return (
     <div>
       {!isLoading && (
