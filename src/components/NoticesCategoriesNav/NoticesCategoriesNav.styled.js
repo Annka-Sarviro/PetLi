@@ -33,7 +33,7 @@ export const CategoryBtn = styled(Button)`
   }
 `;
 
-export const AddBtn = styled.button`
+export const AddBtn = styled(Button)`
   position: fixed;
 
   bottom: 50px;

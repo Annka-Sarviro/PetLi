@@ -20,7 +20,7 @@ import { noticeActions } from "redux/notices/noticeSlice";
 import { userSlice } from "redux/user";
 import { useAddFavoriteNoticeMutation, useDeleteFavoriteNoticeMutation } from "redux/userApi";
 
-const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, male, location, price, image, favoriteNoticeId, notieceId }) => {
+const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, location, price, image, notieceId, favoriteNoticeId }) => {
   const [isFavorite, setFavorite] = useState(false);
   const [isUserNotice, setIsUserNotice] = useState(false);
   const [deleteNotice, { isLoading: isDeleting }] = useDeleteNoticeMutation();
@@ -29,7 +29,7 @@ const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, male, 
   const token = useSelector(({ auth }) => auth.token);
   const dispatch = useDispatch();
   const { userActions } = userSlice;
-  const [userNotice, setUserNotics] = useState(notieceId);
+
   const BASE_URL = "https://petly-be.herokuapp.com/";
   const openModalNotice = id => {
     dispatch(noticeActions.changeModalViewNotice(id));
@@ -38,28 +38,26 @@ const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, male, 
   };
 
   useEffect(() => {
-    setUserNotics(notieceId);
     checkFavorite(favoriteNoticeId, id);
-    checkToUserNotice(userNotice, id);
-  }, [favoriteNoticeId, id, notieceId, userNotice]);
+    checkToUserNotice(notieceId, id);
+  }, [favoriteNoticeId, id, notieceId]);
 
   const checkFavorite = (favoriteNoticeId, id) => {
     if (!favoriteNoticeId) {
       return;
     }
-    const filterednotice = favoriteNoticeId.find(notice => notice === id);
 
+    const filterednotice = favoriteNoticeId.find(notice => notice === id);
     if (filterednotice) {
       setFavorite(true);
     }
   };
 
-  const checkToUserNotice = (userNotice, id) => {
-    if (!userNotice) {
+  const checkToUserNotice = (userNoticeId, id) => {
+    if (!userNoticeId) {
       return;
     }
-    const filteredNotice = userNotice.find(notice => notice === id);
-
+    const filteredNotice = userNoticeId.find(notice => notice === id);
     if (filteredNotice) {
       setIsUserNotice(true);
     }
@@ -69,14 +67,11 @@ const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, male, 
     if (!date) {
       return "";
     }
-
     let today = new Date();
     let birthDate = new Date(date);
     let age = today.getFullYear() - birthDate.getFullYear();
-
     let m = today.getMonth() - birthDate.getMonth();
     let d = today.getDay() - birthDate.getDay();
-
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
       age--;
     }
@@ -86,7 +81,6 @@ const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, male, 
         m--;
       }
     }
-
     return age ? age + " year" : m + " month";
   };
 
@@ -98,7 +92,6 @@ const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, male, 
     if (isFavorite) {
       deleteFavoriteNotice(id);
       dispatch(userActions.deleteFavorite(id));
-
       return setFavorite(false);
     }
     addFavoriteNotice(id);

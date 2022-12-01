@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const BASE_URL = "https://petly-be.herokuapp.com/notices";
+const BASE_URL = "https://petly-be.herokuapp.com/";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: BASE_URL,
@@ -26,14 +26,21 @@ export const noticesApi = createApi({
         const perPageQuery = !!perPage !== 15 ? "" : `&&per_page=${perPage}`;
         const filterQuery = filter === "" ? "" : `&&filter=${filter}`;
 
-        return `/?${categoryQuery + pageQuery + perPageQuery + filterQuery}`;
+        if (category === "favorite") {
+          return `/user/favorite?${pageQuery + perPageQuery + filterQuery}`;
+        }
+
+        if (category === "my_adds") {
+          return `/user/notice?${pageQuery + perPageQuery + filterQuery}`;
+        }
+        return `/notices?${categoryQuery + pageQuery + perPageQuery + filterQuery}`;
       },
       providesTags: ["Notices"],
     }),
 
     getNoticesById: builder.query({
       query: noticeId => ({
-        url: `/${noticeId}`,
+        url: `/notices/${noticeId}`,
         method: "GET",
       }),
       providesTags: ["Notices"],
@@ -41,7 +48,7 @@ export const noticesApi = createApi({
 
     deleteNotice: builder.mutation({
       query: noticeId => ({
-        url: `/${noticeId}`,
+        url: `/notices/${noticeId}`,
         method: "DELETE",
       }),
       invalidatesTags: ["Notices"],
@@ -49,7 +56,7 @@ export const noticesApi = createApi({
 
     noticesByCategory: builder.query({
       query: category => ({
-        url: `?category=${category}`,
+        url: `/notices?category=${category}`,
         method: "GET",
       }),
       providesTags: ["Notices"],
@@ -62,7 +69,7 @@ export const noticesApi = createApi({
         if (formdata.avatar) {
           newFormdata.set("avatar", formdata.avatar[0]);
         }
-        return { url: `?category=${noticeCategory}`, method: "POST", body: newFormdata };
+        return { url: `/notices?category=${noticeCategory}`, method: "POST", body: newFormdata };
       },
       invalidatesTags: ["Notices"],
     }),

@@ -32,6 +32,7 @@ function NoticesCategoriesNav() {
         <CategoryBtn name="sell" active={checkCategory("sell")} onClick={handleClick}>
           Sell
         </CategoryBtn>
+
         {token && (
           <>
             <CategoryBtn name="favorite" active={checkCategory("favorite")} onClick={handleClick}>
@@ -52,11 +53,10 @@ function NoticesCategoriesNav() {
         </>
       )}
 
-      {screenSize < 768 && (
+      {screenSize <= 767 && (
         <>
           <AddBtn onClick={handleModalOpen}>
             <Cross />
-
             <p>Add pet</p>
           </AddBtn>
         </>
