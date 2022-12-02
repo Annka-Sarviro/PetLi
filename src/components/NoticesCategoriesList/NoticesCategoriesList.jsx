@@ -13,8 +13,6 @@ const NoticesCategoriesList = () => {
   const category = useSelector(({ notice }) => notice.category);
   const filter = useSelector(({ notice }) => notice.filter);
 
-  const token = useSelector(({ auth }) => auth.token);
-
   const [categorySelect, setcategorySelect] = useState();
 
   useEffect(() => {

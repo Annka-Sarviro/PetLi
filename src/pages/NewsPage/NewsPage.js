@@ -5,8 +5,6 @@ import { Container, Box, Card, Title, SearchBox, Input, Button, NotFoundBox, Not
 import NewsCard from "../../components/NewsCards/NewsCard";
 import searchIcon from "../../img/VectorG.svg";
 import getNews from "./getNews";
-const SERVER_NAME = process.env.REACT_APP_SITE_URL;
-const BASE_URL = `${SERVER_NAME}user/`;
 
 function News() {
   const [news, setNews] = useState([]);
