@@ -4,6 +4,7 @@ import { List } from "components/NoticesCategoriesList/NoticesCategoriesList.sty
 import NoticeCategoryItem from "components/NoticeCategoryItem";
 import { NotFoundBox, NotFound } from "pages/NewsPage/NewsPage.styled";
 import { useSelector } from "react-redux";
+
 const NoticeAllList = ({ filter, category, perPage, page }) => {
   const [noti, setNoti] = useState([]);
   const { data = [], isLoading } = useGetNoticesQuery({ filter, category, perPage, page });
