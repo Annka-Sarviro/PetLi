@@ -7,9 +7,9 @@ your small pets</h1>
 
 </div>
 
-Проект можна подивитись в [DEMO](https://max-loktionov.github.io/petly-project-fe/)
+Проект можна подивитись 
 
-https://project-group-4-petly.netlify.app/petly-project-fe
+https://annka-petlibi.netlify.app/PetLi/
 
 ## **Опис**
 
@@ -174,7 +174,7 @@ npm start
 
 ## **Backend-розробка**
 
-[Petly-be](https://github.com/Max-Loktionov/petly-be)
+[PetLi-BE](https://github.com/Annka-Sarviro/PetLi-BE)
 
 ```
 
