@@ -17,11 +17,12 @@ export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery,
   tagTypes: ["User"],
+  refetchOnMountOrArgChange: true,
 
   endpoints: builder => ({
     getUser: builder.query({
       query: () => "/",
-      providesTags: ["User"],
+      providesTags: ["User", "Auth"],
     }),
 
     updateUser: builder.mutation({
@@ -30,7 +31,7 @@ export const userApi = createApi({
         method: "PATCH",
         body: data,
       }),
-      invalidatesTags: ["User"],
+      invalidatesTags: ["User", "Auth"],
     }),
 
     updateUserAvatar: builder.mutation({
