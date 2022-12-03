@@ -19,7 +19,6 @@ import {
   ImageContainer,
 } from "./UserDataItem.styled";
 import { useForm } from "react-hook-form";
-const BASE_URL = process.env.REACT_APP_SITE_URL;
 
 const UserDataForm = () => {
   const { data: user = [], isLoading } = useGetUserQuery();
@@ -37,10 +36,10 @@ const UserDataForm = () => {
     (() => dispatch(userActions.getUserNotice(result?.notieceId)))();
   });
 
-  const imgUrl = user?.data?.result?.avatar;
+  const imgUrl = result?.avatar;
   const imgAlt = user?.data?.result?.name;
-  const birthday = user.data?.result?.birthday;
-  const city = user.data?.result?.city;
+  const birthday = result?.birthday;
+  const city = result?.city;
   const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   const nameRegex = /[a-zA-Z]+/;
   const cityRegex = /^(\w+(,)\s*)+\w+$/;
@@ -55,9 +54,9 @@ const UserDataForm = () => {
       reader.onloadend = () => {
         const avatar = reader.result;
         setNewUserAvatar(avatar);
-        const formad = new FormData();
-        formad.append("avatar", e.target.files[0]);
-        changeUserAvatar(formad);
+        const file = new FormData();
+        file.append("avatar", e.target.files[0]);
+        changeUserAvatar(file);
       };
     }
   };
@@ -74,7 +73,7 @@ const UserDataForm = () => {
             <>
               <BoxImg>
                 {!isChangeUserAvatar ? (
-                  <ImgUser id="img_container" src={imgUrl ? BASE_URL + imgUrl : devaultIcon} alt={imgAlt} />
+                  <ImgUser id="img_container" src={imgUrl ? imgUrl : devaultIcon} alt={imgAlt} />
                 ) : (
                   <ImgUser id="img_container" src={newUserAvatar} alt={imgAlt} />
                 )}

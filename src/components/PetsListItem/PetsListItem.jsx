@@ -6,8 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import devaultIcon from "../../img/default-icon-pets.png";
 import { PetItem, InfoPet, Title, ImgPet, BoxInfo, DeleteBtm, DelIcon } from "./PetsListItem.styled";
 
-const BASE_URL = process.env.REACT_APP_SITE_URL;
-
 const PetsListItem = ({ id, name, birthday, breed, comment, avatar }) => {
   const [deletePet, { isLoading: isDeleting }] = useDeletePetMutation();
 
@@ -15,7 +13,7 @@ const PetsListItem = ({ id, name, birthday, breed, comment, avatar }) => {
 
   return (
     <PetItem>
-      <ImgPet src={avatar ? BASE_URL + avatar : devaultIcon} alt={`${name}`}></ImgPet>
+      <ImgPet src={avatar ? avatar : devaultIcon} alt={`${name}`}></ImgPet>
       <BoxInfo>
         <DeleteBtm type="button" disabled={isDeleting} onClick={() => deletePet(id)}>
           <DelIcon />

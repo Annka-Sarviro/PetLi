@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { userSlice } from "redux/user";
 import { useState } from "react";
 import { useAddFavoriteNoticeMutation } from "redux/userApi";
-const BASE_URL = process.env.REACT_APP_SITE_URL;
 
 function ModalNotice({ onClose, favorite }) {
   const id = useSelector(({ notice }) => notice.modalViewNotice.id);
@@ -40,7 +39,7 @@ function ModalNotice({ onClose, favorite }) {
         <>
           <ImageContainer>
             <PictureData>
-              <img src={image ? BASE_URL + image : defoultImage} alt={data.notice.title}></img>
+              <img src={image ? image : defoultImage} alt={data.notice.title}></img>
               <Cathegory>{data.notice.category}</Cathegory>
             </PictureData>
             <div>

@@ -30,8 +30,6 @@ const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, locati
   const dispatch = useDispatch();
   const { userActions } = userSlice;
 
-  const BASE_URL = process.env.REACT_APP_SITE_URL;
-
   const openModalNotice = id => {
     dispatch(noticeActions.changeModalViewNotice(id));
     dispatch(noticeActions.changeModalNoticeId(id));
@@ -103,7 +101,7 @@ const NoticeCategoryItem = ({ id, name, title, birthday, breed, category, locati
   return (
     <Item>
       <ImageThumb>
-        <Image src={image ? BASE_URL + image : defoultImage} alt={title}></Image>
+        <Image src={image ? image : defoultImage} alt={title}></Image>
         <Category>{category}</Category>
         <BtnFavorite type="button" onClick={handleClickFavorite}>
           <img src={isFavorite ? like : unlike} alt="unlike" />
